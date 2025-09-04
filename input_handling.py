@@ -1,7 +1,8 @@
 from shared import *
 from respawn_replay_system import*
 from player_movement_and_rotation import*
-
+from Boost import*
+from trapping_system import*    
 
 def keyboard_down(k, x, y):
     global camera_mode, third_person_height, third_person_angle

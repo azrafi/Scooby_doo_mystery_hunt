@@ -1623,8 +1623,8 @@ def activate_boost():
 def init_gl():
     glClearColor(0.1, 0.05, 0.15, 1)  # Dark purple background
     glEnable(GL_DEPTH_TEST)
-    # glEnable(GL_LIGHTING)
-    # glEnable(GL_LIGHT0)
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
     glEnable(GL_COLOR_MATERIAL)
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
