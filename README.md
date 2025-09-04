@@ -77,5 +77,4 @@
 
   Runs with OpenGL.GL / GLUT / GLU only; no textures, models, audio, or physics engines—just what your allowed file uses.
 ﻿
-rahul06_
  
