@@ -72,3 +72,10 @@ def special_down(key, x, y):
 
 def mouse(button, state, x, y):
     pass
+
+
+
+def reshape(w, h):
+    global WIN_W, WIN_H, ASPECT
+    WIN_W, WIN_H = max(1, w), max(1, h)
+    ASPECT = WIN_W / float(WIN_H)
