@@ -1,7 +1,21 @@
 from Scooby_doo_mystery_hunt.shared import *
-from core_engine import *
-from Scooby_doo_mystery_hunt.environment import *
-from gameplay import *
+# from core_engine import *
+# from Scooby_doo_mystery_hunt.environment import *
+# from gameplay import *
+from achievements import *
+from player_movement_and_rotation import *
+from input_handling import *
+from respawn_replay_system import *
+from Boost import*
+from trapping_system import*
+from immersive_room_system import*
+from monster_&_detection import*
+from monsterreveal import*
+from hud import*
+from scooby_npc import* 
+from clue_mech import*
+from update_camera import*
+from multiple_room_layout import*
 
 def update(dt):
     global invuln_t, m_spawn_timer, m_visible_timer, scooby_timer, scooby_active, scooby_cd_left, m_name, m_name_revealed, game_won
