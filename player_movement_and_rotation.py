@@ -1,9 +1,11 @@
+#Enhanced player movement and collision system for Scooby-Doo Mystery Hunt(2 feature in one file)
 from shared import *
-
+from Boost import*
 
 def clamp(v, a, b):
     return a if v < a else (b if v > b else v)
 
+keys_down = set()
 
 
 def update_player(dt):
