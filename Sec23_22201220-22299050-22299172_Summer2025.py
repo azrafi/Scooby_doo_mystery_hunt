@@ -455,12 +455,11 @@ def draw_monster():
         glScalef(2.2, 2.2, 3.5)  # Huge ghost body
         glutSolidCube(45)
 
-        # Massive ghostly trail
         glLoadIdentity()
         glTranslatef(mx, my, 20)
         glRotatef(-90, 1, 0, 0)
         glColor3f(0.3, 0.1, 0.5)
-        draw_cylinder(40, 20, 80)  # Enormous trail
+        draw_cylinder(40, 20, 80)  
         glPopMatrix()
 
     # Stage 3: Menacing Phantom Giant (2 clues) - GIANT SIZE
@@ -497,7 +496,7 @@ def draw_monster():
         glTranslatef(0, 0, -100)
         glRotatef(-90, 1, 0, 0)
         glColor3f(0.2, 0.05, 0.4)
-        draw_cylinder(50, 25, 100)  # Enormous swirling trail
+        draw_cylinder(50, 25, 100) 
         glPopMatrix()
 
     # Stage 4: Revealed Giant Villain - Old Man Jenkins (3+ clues) - GIANT SIZE
@@ -516,24 +515,24 @@ def draw_monster():
         glScalef(3.0, 2.5, 5.0)  # Massive giant body
         glutSolidCube(35)  # Huge cube
 
-        # Giant arms - menacing pose
+       
         glLoadIdentity()
         glTranslatef(mx, my, 100)  # Very high position for giant
         for side in [-1, 1]:
             glPushMatrix()
-            glTranslatef(side * 70, 0, 0)  # Very wide giant arm span
+            glTranslatef(side * 70, 0, 0)  
             glRotatef(side * 15, 0, 0, 1)  # Slight angle for menacing look
             glColor3f(0.8, 0.7, 0.6)  # skin
-            glScalef(2.0, 2.0, 6.0)  # Massive giant arms
+            glScalef(2.0, 2.0, 6.0) 
             glutSolidCube(25)  # Huge arm cubes
             glPopMatrix()
 
-        # Giant legs
+        
         for side in [-1, 1]:
             glPushMatrix()
             glTranslatef(side * 35, 0, -120)  # Much wider stance, deeper position
             glColor3f(0.2, 0.2, 0.2)  # dark pants
-            glScalef(2.5, 2.5, 6.0)  # Enormous giant legs
+            glScalef(2.5, 2.5, 6.0) 
             glutSolidCube(30)  # Massive leg cubes
             glPopMatrix()
 
@@ -546,9 +545,9 @@ def draw_monster():
             glPopMatrix()
         glPopMatrix()
 
-    # Giant eyes - different colors and sizes based on stage
+    
     if clue_count < 3:
-        glColor3f(1.0, 0.0, 0.0)  # red glowing eyes
+        # glColor3f(1.0, 0.0, 0.0) 
         eye_size = 8  # Bigger glowing eyes for giants
         eye_height = 80 + (clue_count * 20)  # Higher for each stage
         eye_spacing = 25  # Wider spacing for giant heads
@@ -945,9 +944,9 @@ def update_traps(dt):
                         if lives == 1:
                             achievement_stats['close_calls'] += 1
 
-                        lives -= 1
-                        if lives <= 0:
-                            reset_game()
+                        # lives -= 1
+                        # if lives <= 0:
+                        #     reset_game()
         else:
             # Reset trap when player moves away
             if trap['triggered']:
@@ -1005,23 +1004,7 @@ def target_for_monster():
         return px + 70.0, py
     return px, py
 
-# def try_spawn_monster(dt):
-#     global m_visible, m_spawn_timer, m_visible_timer
-#     if m_visible:
-#         return
-#     m_spawn_timer -= dt
-#     if m_spawn_timer <= 0.0:
-#         # Rarely spawn when few clues; more often later
-#         rarity = max(0.3, 1.0 - 0.12 * collected_clues())  # falls with clues
-#         # deterministic oscillation instead of random: spawn on certain phases
-#         phase = saw01(7.5)
-#         if phase > (0.95 - 0.3 * (TOTAL_CLUES - collected_clues())/TOTAL_CLUES):
-#             m_visible = True
-#             m_visible_timer = 3.0 + collected_clues() * 0.7
-#             # place a bit away from player along corridor
-#             place_monster_away()
-#         else:
-#             m_spawn_timer = 1.2 * rarity
+
 def try_spawn_monster(dt):
     global m_visible, m_spawn_timer, m_visible_timer
     if m_visible:
@@ -1481,11 +1464,11 @@ def draw_hud():
     draw_text(x0, y0 - 56, f"Difficulty: {DIFFICULTY.title()}")
     # Safety status
     if is_player_in_room():
-        glColor3f(0.2, 1.0, 0.2)  # Green for safe
+        # glColor3f(0.2, 1.0, 0.2)  # Green for safe
         draw_text(x0, y0 - 84, "STATUS: SAFE IN ROOM")
         glColor3f(1.0, 1.0, 1.0)  # Reset to white
     else:
-        glColor3f(1.0, 0.3, 0.3)  # Red for danger
+        # glColor3f(1.0, 0.3, 0.3)  # Red for danger
         draw_text(x0, y0 - 84, "STATUS: CORRIDOR (DANGER)")
         glColor3f(1.0, 1.0, 1.0)  # Reset to white
 
@@ -1494,7 +1477,7 @@ def draw_hud():
     draw_text(x0, y0 - 112, f"Boost: {boost_str}")
 
     # Instructions
-    glColor3f(0.8, 0.8, 0.8)  # Gray for instructions
+    # glColor3f(0.8, 0.8, 0.8)  # Gray for instructions
     draw_text(x0, y0 - 140, "WASD: Move  Arrows: Camera  1: TPS  2: FPS  U: Overhead  B: Boost  R: Restart")
     draw_text(x0, y0 - 168, "Enter rooms through doors for safety!")
 
@@ -1507,7 +1490,7 @@ def draw_hud():
     # Recent achievements (show up to 3 most recently unlocked)
     unlocked_achievements = [name for name, data in achievements.items() if data['unlocked']]
     if unlocked_achievements:
-        glColor3f(1.0, 1.0, 0.0)  # Yellow for achievements
+        # glColor3f(1.0, 1.0, 0.0)  # Yellow for achievements
         draw_text(x0, y0 - 196, f"Achievements: {len(unlocked_achievements)}/7")
         # Show last few unlocked
         for i, achievement_name in enumerate(unlocked_achievements[-3:]):
@@ -1587,8 +1570,8 @@ def keyboard_down(k, x, y):
         DIFFICULTY = 'easy'
         monster_speed_mult = 1.0
         clue_switch_rate = 1.0
-    if k == b's' and player_frozen:
-        player_frozen = False
+    # if k == b'9' and player_frozen:
+    #     player_frozen = False
 
 def keyboard_up(k, x, y):
     if k in keys_down:
@@ -1640,8 +1623,8 @@ def activate_boost():
 def init_gl():
     glClearColor(0.1, 0.05, 0.15, 1)  # Dark purple background
     glEnable(GL_DEPTH_TEST)
-    # glEnable(GL_LIGHTING)
-    # glEnable(GL_LIGHT0)
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
     glEnable(GL_COLOR_MATERIAL)
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
