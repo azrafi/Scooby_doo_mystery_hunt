@@ -1,6 +1,6 @@
-from shared import *
+from Scooby_doo_mystery_hunt.shared import *
 from core_engine import *
-from environment import *
+from Scooby_doo_mystery_hunt.environment import *
 from gameplay import *
 
 def update(dt):

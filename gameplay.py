@@ -1,4 +1,4 @@
-from shared import *
+from Scooby_doo_mystery_hunt.shared import *
 
 def draw_scooby():
     """Draw Scooby Doo character"""
