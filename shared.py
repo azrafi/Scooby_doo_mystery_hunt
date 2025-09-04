@@ -52,7 +52,7 @@ pdir = 0.0               # yaw in degrees (0 = +Y)
 pspd = 180.0             # units/sec
 lives = 3
 invuln_t = 0.0
-game_won = False         # Win condition when monster name is revealed
+game_won = False         # Win condition when monster name is revealed on the screen
 
 player_frozen = False
 

@@ -1,4 +1,4 @@
-from shared import *
+from Scooby_doo_mystery_hunt.shared import *
 
 def draw_room_box(cx, cy, open_to_hall=True):
     # Draw room walls (interior walls of a house)
@@ -468,7 +468,8 @@ def get_current_room():
             abs(py - room_y) < ROOM_SIZE * 0.5):
             return i + 3  # Room index 3, 4, 5
     
-    return None  # Player is in hallway
+    return None  
+    # Player is in hallway
 
 def is_player_in_room():
     """Check if player is currently inside any room"""
