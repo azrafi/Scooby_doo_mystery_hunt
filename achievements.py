@@ -1,3 +1,7 @@
+from Scooby_doo_mystery_hunt.shared import *
+
+
+
 # ---------- Achievement System ----------
 achievements = {
     'first_clue': {'unlocked': False, 'name': 'First Clue', 'desc': 'Found your first clue'},

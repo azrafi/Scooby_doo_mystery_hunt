@@ -1,3 +1,7 @@
+from Scooby_doo_mystery_hunt.shared import *
+
+
+
 def draw_clues_and_pickup():
     pulse = 0.5 + 0.5 * abs(0.5 - saw01(1.5)) * 2.0  # glow 0..1
     picked = 0

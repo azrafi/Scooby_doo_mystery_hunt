@@ -1,3 +1,7 @@
+from Scooby_doo_mystery_hunt.shared import *
+
+
+
 
 # ---------- Scooby (Boost) ----------
 scooby_active = False

@@ -1,3 +1,7 @@
+from Scooby_doo_mystery_hunt.shared import *
+
+
+
 def draw_scooby():
     # More detailed Scooby with legs and collar
     glPushMatrix()

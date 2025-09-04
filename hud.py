@@ -1,3 +1,7 @@
+
+from Scooby_doo_mystery_hunt.shared import *
+
+
 # ---------- HUD ----------
 def draw_hud():
     glDisable(GL_LIGHTING)

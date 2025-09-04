@@ -204,6 +204,75 @@ def update_monster(dt):
             m_visible = False
         return
 
+   # ---------- Monster logic ----------
+def target_for_monster():
+    # If Scooby is active, monster targets Scooby proxy slightly away from player
+    if scooby_active:
+        return px + 70.0, py
+    return px, py
+
+# def try_spawn_monster(dt):
+#     global m_visible, m_spawn_timer, m_visible_timer
+#     if m_visible:
+#         return
+#     m_spawn_timer -= dt
+#     if m_spawn_timer <= 0.0:
+#         # Rarely spawn when few clues; more often later
+#         rarity = max(0.3, 1.0 - 0.12 * collected_clues())  # falls with clues
+#         # deterministic oscillation instead of random: spawn on certain phases
+#         phase = saw01(7.5)
+#         if phase > (0.95 - 0.3 * (TOTAL_CLUES - collected_clues())/TOTAL_CLUES):
+#             m_visible = True
+#             m_visible_timer = 3.0 + collected_clues() * 0.7
+#             # place a bit away from player along corridor
+#             place_monster_away()
+#         else:
+#             m_spawn_timer = 1.2 * rarity
+def try_spawn_monster(dt):
+    global m_visible, m_spawn_timer, m_visible_timer
+    if m_visible:
+        return
+    m_spawn_timer -= dt
+    if m_spawn_timer <= 0.0:
+        m_visible = True
+        m_visible_timer = 3.0 + collected_clues() * 0.7
+        place_monster_away()
+        m_spawn_timer = 1.2 * max(0.3, 1.0 - 0.12 * collected_clues())  # reset timer
+
+
+def place_monster_away():
+    global mx, my
+    # appear ahead or behind in corridor boundary
+    ahead = 1 if saw01(1000.0) > 0.5 else -1
+    my = clamp(py + ahead * 300.0, -HALL_LEN*0.45, HALL_LEN*0.45)
+    mx = clamp(px + (HALL_HALF - 30.0) * (1 if px < 0 else -1), -HALL_HALF+20.0, HALL_HALF-20.0)
+
+def update_monster(dt):
+    global mx, my, m_visible, m_visible_timer, m_speed, monster_speed_mult
+    if not m_visible:
+        return
+
+    # If player is safe in a room, monster waits in corridor
+    if is_player_in_room():
+        # Monster lurks near the room entrance but doesn't enter
+        # Find which room player is in and wait outside
+        for y in ROOM_Y:
+            half = ROOM_SIZE * 0.5
+            if (LEFT_X - half <= px <= LEFT_X + half) and (y - half <= py <= y + half):
+                # Player in left room - monster waits outside
+                mx = LEFT_X + half + 30
+                my = y + half + 20
+                break
+            elif (RIGHT_X - half <= px <= RIGHT_X + half) and (y - half <= py <= y + half):
+                # Player in right room - monster waits outside
+                mx = RIGHT_X - half - 30
+                my = y + half + 20
+                break
+        m_visible_timer -= dt * 0.5  # Timer decreases slower when waiting
+        if m_visible_timer <= 0.0:
+            m_visible = False
+        return
+
     # Normal monster behavior in corridor
     # speed scales with clues
     m_speed = (m_speed_base + 40.0 * collected_clues()) * monster_speed_mult
@@ -249,3 +318,22 @@ def check_player_hit():
         invuln_t = 1.4
         m_visible = False
 
+def is_player_in_room():
+    """Check if player is safely inside any room (not just at the door)"""
+    half = ROOM_SIZE * 0.5
+    door_threshold = 25  # Distance from door where player is still vulnerable
+
+    for y in ROOM_Y:
+        # Left room
+        if (LEFT_X - half <= px <= LEFT_X + half) and (y - half <= py <= y + half):
+            # Check if player is deep inside room (away from door)
+            if py < y + half - door_threshold:
+                return True
+
+        # Right room
+        if (RIGHT_X - half <= px <= RIGHT_X + half) and (y - half <= py <= y + half):
+            # Check if player is deep inside room (away from door)
+            if py < y + half - door_threshold:
+                return True
+
+    return False
