@@ -1,4 +1,6 @@
 from Scooby_doo_mystery_hunt.shared import *
+from immersive_room_system import*
+from achievements import*
 
 def update_camera():
     glMatrixMode(GL_PROJECTION)
