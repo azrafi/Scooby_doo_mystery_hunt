@@ -1,6 +1,8 @@
 from shared import *
+from main import *
 from Scooby_doo_mystery_hunt.shared import *
-
+from clue_mech import *
+from multiple_room_layout import *
 
 def draw_monster():
     # Monster transformation stages - ALL STAGES AS TOWERING GIANTS
@@ -166,6 +168,11 @@ def draw_monster():
         glPopMatrix()
 
 
+def target_for_monster():
+    # If Scooby is active, monster targets Scooby proxy slightly away from player
+    if scooby_active:
+        return px + 70.0, py
+    return px, py
 
 def try_spawn_monster(dt):
     global m_visible, m_spawn_timer, m_visible_timer
