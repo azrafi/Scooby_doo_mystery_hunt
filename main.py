@@ -9,7 +9,7 @@ from respawn_replay_system import *
 from Boost import*
 from trapping_system import*
 from immersive_room_system import*
-from monster_&_detection import*
+from monster_and_detection import*
 from monsterreveal import*
 from hud import*
 from scooby_npc import* 
