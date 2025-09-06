@@ -171,3 +171,126 @@ def draw_all_rooms():
         glPushMatrix(); draw_room_box(LEFT_X, y); glPopMatrix()
         glPushMatrix(); draw_room_box(RIGHT_X, y); glPopMatrix()
 
+def draw_house_decorations():
+    """Add simple decorations to make the house more lively using only basic shapes"""
+
+    # Hallway decorations - simple shapes only
+    # Potted plants along the hallway
+    for y in [-400, -200, 0, 200, 400]:
+        for x in [-HALL_HALF - 30, HALL_HALF + 30]:
+            # Pot
+            glColor3f(0.4, 0.2, 0.1)  # brown pot
+            glPushMatrix()
+            glTranslatef(x, y, 15)
+            draw_cylinder(12, 8, 20, 8, 1)
+            glPopMatrix()
+
+            # Plant
+            glColor3f(0.2, 0.6, 0.2)  # green plant
+            glPushMatrix()
+            glTranslatef(x, y, 30)
+            draw_sphere(8, 6, 6)
+            glPopMatrix()
+
+    # Simple wall decorations - using cubes as "paintings"
+    for i, y in enumerate([-300, 0, 300]):
+        # Left wall paintings
+        glColor3f(0.8, 0.6, 0.4)  # frame color
+        glPushMatrix()
+        glTranslatef(-HALL_HALF - 15, y, 80)
+        glScalef(5, 40, 30)
+        glutSolidCube(1)
+        glPopMatrix()
+
+        # Picture inside frame
+        colors = [(0.8, 0.6, 0.4), (0.6, 0.8, 0.4), (0.8, 0.4, 0.6)]  # More natural colors
+        glColor3f(*colors[i])
+        glPushMatrix()
+        glTranslatef(-HALL_HALF - 12, y, 80)
+        glScalef(2, 35, 25)
+        glutSolidCube(1)
+        glPopMatrix()
+
+        # Right wall paintings
+        glColor3f(0.8, 0.6, 0.4)  # frame color
+        glPushMatrix()
+        glTranslatef(HALL_HALF + 15, y, 80)
+        glScalef(5, 40, 30)
+        glutSolidCube(1)
+        glPopMatrix()
+
+        # Picture inside frame
+        glColor3f(*colors[i])
+        glPushMatrix()
+        glTranslatef(HALL_HALF + 12, y, 80)
+        glScalef(2, 35, 25)
+        glutSolidCube(1)
+        glPopMatrix()
+
+    # Room decorations - furniture inside rooms
+    for y in ROOM_Y:
+        # Left rooms - add simple furniture
+        room_half = ROOM_SIZE * 0.5
+
+        # Table in left room
+        glColor3f(0.6, 0.4, 0.2)  # brown table
+        glPushMatrix()
+        glTranslatef(LEFT_X - 30, y, 35)
+        glScalef(60, 40, 5)
+        glutSolidCube(1)
+        glPopMatrix()
+
+        # Table legs
+        for dx, dy in [(-25, -15), (25, -15), (-25, 15), (25, 15)]:
+            glPushMatrix()
+            glTranslatef(LEFT_X - 30 + dx, y + dy, 17)
+            draw_cylinder(3, 3, 30, 6, 1)
+            glPopMatrix()
+
+        # Chair in left room
+        glColor3f(0.5, 0.3, 0.1)
+        glPushMatrix()
+        glTranslatef(LEFT_X + 40, y, 20)
+        glScalef(30, 30, 40)
+        glutSolidCube(1)
+        glPopMatrix()
+
+        # Right rooms - different furniture
+        # Bookshelf in right room
+        glColor3f(0.4, 0.3, 0.2)
+        glPushMatrix()
+        glTranslatef(RIGHT_X + 40, y, 50)
+        glScalef(25, 80, 100)
+        glutSolidCube(1)
+        glPopMatrix()
+
+        # Books on shelf
+        for i, book_y in enumerate([y-25, y, y+25]):
+            colors = [(0.8, 0.6, 0.4), (0.6, 0.8, 0.4), (0.8, 0.4, 0.6)]  # More natural colors
+            glColor3f(*colors[i])
+            glPushMatrix()
+            glTranslatef(RIGHT_X + 50, book_y, 60 + i*15)
+            glScalef(8, 15, 12)
+            glutSolidCube(1)
+            glPopMatrix()
+
+    # Simple chandelier in center of hallway (will just float if NO_ROOF=True — ok)
+    glColor3f(0.8, 0.8, 0.2)  # golden chandelier
+    glPushMatrix()
+    glTranslatef(0, 0, CEILING_HEIGHT - 30)
+    draw_sphere(15, 8, 8)
+    glPopMatrix()
+
+    # Chandelier arms
+    for angle in range(0, 360, 60):
+        glPushMatrix()
+        glTranslatef(0, 0, CEILING_HEIGHT - 30)
+        glRotatef(angle, 0, 0, 1)
+        glTranslatef(20, 0, 0)
+        draw_cylinder(2, 2, 15, 6, 1)
+        # Small light
+        glColor3f(1.0, 1.0, 0.8)
+        glTranslatef(0, 0, -10)
+        draw_sphere(4, 6, 6)
+        glColor3f(0.8, 0.8, 0.2)
+        glPopMatrix()
