@@ -1,6 +1,6 @@
 from shared import *
 from Scooby_doo_mystery_hunt.shared import *
-
+from achievements import *
 
 def draw_traps():
     """Draw all active traps with visual effects"""
