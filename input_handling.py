@@ -9,7 +9,7 @@ def keyboard_down(k, x, y):
     global DIFFICULTY, monster_spawn_rate, clue_switch_rate, monster_speed_mult
     global player_frozen
 
-    keys_down.add(k)
+    keys_down.add(k) 
     if k == b'1': camera_mode = CAM_TPS
     if k == b'2': camera_mode = CAM_FPS
     if k == b'u':
