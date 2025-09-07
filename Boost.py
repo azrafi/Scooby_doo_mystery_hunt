@@ -1,6 +1,6 @@
 from Scooby_doo_mystery_hunt.shared import *
-
-
+from clue_mech import *
+from achievements import *
 
 
 # ---------- Scooby (Boost) ----------
