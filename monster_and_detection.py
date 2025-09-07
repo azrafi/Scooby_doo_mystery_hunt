@@ -185,6 +185,13 @@ def try_spawn_monster(dt):
         place_monster_away()
         m_spawn_timer = 1.2 * max(0.3, 1.0 - 0.12 * collected_clues())  # reset timer
 
+def place_monster_away():
+    global mx, my
+    # appear ahead or behind in corridor boundary
+    ahead = 1 if saw01(1000.0) > 0.5 else -1
+    my = clamp(py + ahead * 300.0, -HALL_LEN*0.45, HALL_LEN*0.45)
+    mx = clamp(px + (HALL_HALF - 30.0) * (1 if px < 0 else -1), -HALL_HALF+20.0, HALL_HALF-20.0)
+
 def update_monster(dt):
     global mx, my, m_visible, m_visible_timer, m_speed, monster_speed_mult
     if not m_visible:
